@@ -1,0 +1,25 @@
+﻿@model Scrumapp.Data.Models.ProjectTask
+<div class="card mb-2  bg-light">
+    <div class="card-header">
+        <img src="@Model.User?.ImageUrl" alt="User Image" class="img-circle user-image" />
+        <strong>
+            @Model.User.FirstName @Model.User.LastName
+        </strong>
+    </div>
+    <div class="card-body  ">
+        <p class="card-text">
+            @Model.Content
+        </p>
+        <footer class="blockquote-footer">Estimated Time - 
+            <cite title="Source Title">@Model.Duration.Hours.ToString().PadLeft(2, '0'):@Model.Duration.Minutes.ToString().PadLeft(2, '0')</cite></footer>
+                                
+    </div>
+    <div class="card-footer text-right">
+        <a asp-action="StartTask" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">
+            <i class="fas fa-play"></i> Start
+        </a>
+        <a asp-action="RemoveTask" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">
+            <i class="fas fa-trash"></i> Remove
+        </a>
+    </div>
+</div>

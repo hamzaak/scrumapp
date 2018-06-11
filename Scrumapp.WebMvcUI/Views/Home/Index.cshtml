@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Project Management with Scrum";
+}
+
+<div class="container">
+    <div class="page-header clearfix text-center">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+    <div class="row">
+        <div class="card-deck">
+            <div class="card">
+                <img class="card-img-top" src="/images/home/adminpanel.jpg" alt="Administration Panel">
+                <div class="card-body">
+                    <h5 class="card-title">Administration Panel</h5>
+                    <p class="card-text">View and manage projects, users and roles.</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary">
+                        Login to Administration Panel <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="/images/home/scrumboard.png" alt="Scrum Board">
+                <div class="card-body">
+                    <h5 class="card-title">Scrum Board</h5>
+                    <p class="card-text">View and join projects which belongs to you.</p>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-primary">
+                        Login to Scrum Board <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

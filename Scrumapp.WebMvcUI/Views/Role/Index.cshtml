@@ -1,0 +1,39 @@
+﻿@model Scrumapp.WebMvcUI.Models.RoleViewModels.ApplicationRoleIndexViewModel
+@{
+    ViewData["Title"] = "Application Roles";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th class="text-center" style="width: 160px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var role in Model.Roles)
+                        {
+                            <tr>
+                                <td>@role.RoleName</td>
+                                <td>@role.Description</td>
+                                <td class="text-center">
+                                    <a asp-controller="Role" asp-action="Edit" asp-route-id="@role.Id" class="btn btn-warning">Edit</a>
+                                    <a asp-controller="Role" asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-controller="Role" asp-action="Create" class="btn btn-success">Create New</a>
+            </section>
+        </div>
+    </div>
+</div>
+

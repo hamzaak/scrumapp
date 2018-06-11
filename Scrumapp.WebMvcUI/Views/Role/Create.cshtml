@@ -1,0 +1,32 @@
+﻿@model Scrumapp.WebMvcUI.Models.RoleViewModels.ApplicationRoleDetailViewModel
+@{
+    ViewData["Title"] = "Create New Role";
+}
+
+<div class="container">
+    <h4>@ViewData["Title"]</h4>
+
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RoleName"></label>
+                    <input asp-for="RoleName" class="form-control" />
+                    <span asp-validation-for="RoleName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-controller="Role" asp-action="Index" class="btn btn-outline-primary">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

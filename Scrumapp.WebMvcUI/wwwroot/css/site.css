@@ -1,0 +1,16 @@
+﻿.page-header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.scrum-content {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.user-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    background: yellow;
+}

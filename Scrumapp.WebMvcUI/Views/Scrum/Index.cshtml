@@ -1,0 +1,153 @@
+﻿@model Scrumapp.WebMvcUI.Models.ScrumViewModels.BoardViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="scrum-content">
+    <section>
+        <a asp-controller="Scrum" asp-action="AddTask" asp-route-id="@Model.ProjectId" class="btn btn-info btn-sm">
+            <i class="fas fa-plus"></i> Add Task
+        </a>
+        <hr />
+        <div class="card-group ">
+            <div class="card bg-default">
+                <div class="card-header text-center">
+                    <strong>Backlog</strong>
+                </div>
+                <div class="card-body">
+                    @foreach (var task in Model.BacklogTasks)
+                    {
+                        <div class="card mb-2 text-white bg-dark">
+                            <div class="card-header">
+                                <img src="@task.User?.ImageUrl" alt="User Image" class="img-circle user-image" />
+                                <strong>
+                                    @task.User?.FirstName @task.User?.LastName
+                                </strong>
+                            </div>
+                            <div class="card-body  ">
+                                <p class="card-text">
+                                    @task.Content
+                                </p>
+                                <footer class="blockquote-footer text-white">
+                                    Estimated Time -
+                                    <cite title="Source Title">@task.Duration.Hours.ToString().PadLeft(2, '0'):@task.Duration.Minutes.ToString().PadLeft(2, '0')</cite>
+                                </footer>
+
+                            </div>
+                            <div class="card-footer text-right">
+                                <a asp-action="StartTask" asp-route-id="@task.Id" class="btn btn-sm btn-light">
+                                    <i class="fas fa-play"></i> Start
+                                </a>
+                                <a asp-action="RemoveTask" asp-route-id="@task.Id" class="btn btn-sm btn-light ">
+                                    <i class="fas fa-trash"></i> Remove
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card ">
+                <div class="card-header text-center">
+                    <strong>In Progress</strong>
+                </div>
+                <div class="card-body">
+                    @foreach (var task in Model.InProgressTasks)
+                    {
+                        <div class="card mb-2 text-white bg-danger">
+                            <div class="card-header">
+                                <img src="@task.User?.ImageUrl" alt="User Image" class="img-circle user-image" />
+                                <strong>
+                                    @task.User?.FirstName @task.User?.LastName
+                                </strong>
+                            </div>
+                            <div class="card-body  ">
+                                <p class="card-text">
+                                    @task.Content
+                                </p>
+                                <footer class="blockquote-footer text-white">
+                                    Estimated Time -
+                                    <cite title="Source Title">@task.Duration.Hours.ToString().PadLeft(2, '0'):@task.Duration.Minutes.ToString().PadLeft(2, '0')</cite>
+                                </footer>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a asp-action="VerifyTask" asp-route-id="@task.Id" class="btn btn-sm btn-light">
+                                    <i class="fas fa-vial"></i> Verify
+                                </a>
+                                <a asp-action="RemoveTask" asp-route-id="@task.Id" class="btn btn-sm btn-light">
+                                    <i class="fas fa-trash"></i> Remove
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header text-center">
+                    <strong>Test</strong>
+                </div>
+                <div class="card-body">
+                    @foreach (var task in Model.TestTasks)
+                    {
+                        <div class="card mb-2 text-white bg-warning">
+                            <div class="card-header">
+                                <img src="@task.User?.ImageUrl" alt="User Image" class="img-circle user-image" />
+                                <strong>
+                                    @task.User?.FirstName @task.User?.LastName
+                                </strong>
+                            </div>
+                            <div class="card-body  ">
+                                <p class="card-text">
+                                    @task.Content
+                                </p>
+                                <footer class="blockquote-footer text-white">
+                                    Estimated Time -
+                                    <cite title="Source Title">@task.Duration.Hours.ToString().PadLeft(2, '0'):@task.Duration.Minutes.ToString().PadLeft(2, '0')</cite>
+                                </footer>
+                            </div>
+                            <div class="card-footer text-right">
+                                <a asp-action="CompleteTask" asp-route-id="@task.Id" class="btn btn-sm btn-light">
+                                    <i class="fas fa-check"></i> Complete
+                                </a>
+                                <a asp-action="RemoveTask" asp-route-id="@task.Id" class="btn btn-sm btn-light">
+                                    <i class="fas fa-trash"></i> Remove
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card ">
+                <div class="card-header text-center">
+                    <strong>Completed</strong>
+                </div>
+                <div class="card-body">
+                    @foreach (var task in Model.CompletedTasks)
+                    {
+                        <div class="card mb-2 text-white bg-success">
+                            <div class="card-header">
+                                <img src="@task.User?.ImageUrl" alt="User Image" class="img-circle user-image" />
+                                <strong>
+                                    @task.User?.FirstName @task.User?.LastName
+                                </strong>
+                            </div>
+                            <div class="card-body  ">
+                                <p class="card-text">
+                                    @task.Content
+                                </p>
+                                <footer class="blockquote-footer text-white">
+                                    Estimated Time -
+                                    <cite title="Source Title">@task.Duration.Hours.ToString().PadLeft(2, '0'):@task.Duration.Minutes.ToString().PadLeft(2, '0')</cite>
+                                </footer>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+

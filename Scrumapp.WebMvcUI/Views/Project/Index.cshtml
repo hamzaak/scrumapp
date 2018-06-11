@@ -1,0 +1,44 @@
+﻿@model Scrumapp.WebMvcUI.Models.ProjectViewModels.ProjectIndexViewModel
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th class="text-center" style="width: 220px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var project in Model.Projects)
+                        {
+                            <tr>
+                                <td>@project.Name</td>
+                                <td>@project.Description</td>
+                                <td class="text-center">
+                                    <a asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id" class="btn btn-warning">Edit</a>
+                                    <a asp-controller="Scrum" asp-action="Index" asp-route-id="@project.Id" class="btn btn-info">
+                                        Scrumboard
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a asp-controller="Project" asp-action="Create" class="btn btn-success">Create New</a>
+            </section>
+        </div>
+    </div>
+</div>
+
+
