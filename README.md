@@ -23,8 +23,8 @@ After open the solution ensure that you run below instructions to have an existi
 
 *Project Profile*
 
-![Project Profile](https://github.com/hamzaak/Scrumapp/blob/master/Scrumapp.WebMvcUI/wwwroot/images/screenshots/project-profile.png)
+![Project Profile](https://github.com/hamzaak/files/blob/master/Scrumapp/project-profile.png)
 
 *Scrumboard*
 
-![Scrumboard](https://github.com/hamzaak/Scrumapp/blob/master/Scrumapp.WebMvcUI/wwwroot/images/screenshots/scrumboard.png)
+![Scrumboard](https://github.com/hamzaak/files/blob/master/Scrumapp/scrumboard.png)
