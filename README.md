@@ -1,2 +1,9 @@
-ASP.NET Core 2.0 Web Application 
-Agile Scrum metodolojisini projelerde kullanmak üzere ASP.NET Core 2.0 Mvc Web teknolojisi kullanılarak hazırlanmış bir uygulamadır.
+## Scrumapp
+
+A project management application that uses Agile Scrum methodology and exemplify ASP.NET Core 2.0 Mvc technology.
+
+### Requirements
+
+* Visual Studio 2017 (Downlaod [here](https://www.visualstudio.com/))
+* MSSQLLocalDB
+
