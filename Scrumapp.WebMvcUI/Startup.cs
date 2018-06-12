@@ -8,6 +8,7 @@ using Scrumapp.Data;
 using Scrumapp.Data.Models;
 using Scrumapp.Services;
 using Scrumapp.Services.Concrete;
+using Scrumapp.WebMvcUI.Utilities;
 
 
 namespace Scrumapp.WebMvcUI
@@ -29,6 +30,8 @@ namespace Scrumapp.WebMvcUI
 
             services.AddScoped<IApplicationUserService, ApplicationUserManager>();
             services.AddScoped<IProjectService, ProjectManager>();
+
+            services.AddScoped<IFileService, FileManager>();
 
             services.AddDbContext<ScrumappDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ScrumappDbConnection")));
