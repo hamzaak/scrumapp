@@ -9,18 +9,11 @@
     <div class="row">
         <div class="col-md-5">
             <section>
-                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
                     <h4>Create a new account.</h4>
                     <hr />
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
-                        <div class="checkbox">
-                            <label asp-for="IsAdmin">
-                                <input asp-for="IsAdmin" />
-                                @Html.DisplayNameFor(m => m.IsAdmin)
-                            </label>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <label asp-for="FirstName"></label>
                         <input asp-for="FirstName" class="form-control" />
@@ -46,7 +39,19 @@
                         <input asp-for="ConfirmPassword" class="form-control" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-default">Register</button>
+                    <div class="form-group">
+                        <label asp-for="Image"></label>
+                        <input asp-for="Image" type="file" class="form-control-file" />
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="IsAdmin">
+                                <input asp-for="IsAdmin" />
+                                @Html.DisplayNameFor(m => m.IsAdmin)
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Create</button>
                 </form>
             </section>
         </div>

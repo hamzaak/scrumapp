@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Scrumapp.WebMvcUI.Models.UserViewModels
@@ -34,5 +35,7 @@ namespace Scrumapp.WebMvcUI.Models.UserViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        
+        public IFormFile Image { get; set; }
     }
 }

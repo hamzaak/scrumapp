@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Scrumapp.WebMvcUI.Models.UserViewModels
 {
@@ -25,11 +26,15 @@ namespace Scrumapp.WebMvcUI.Models.UserViewModels
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        public string ImageUrl { get; set; }
 
         [Phone]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
+
+        public bool ChangeImage { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

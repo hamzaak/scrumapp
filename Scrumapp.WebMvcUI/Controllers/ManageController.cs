@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Scrumapp.WebMvcUI.Models;
 using Scrumapp.WebMvcUI.Models.ManageViewModels;
 using Scrumapp.Data.Models;
-using Scrumapp.Services;
+using Scrumapp.WebMvcUI.Utilities;
 
 namespace Scrumapp.WebMvcUI.Controllers
 {
@@ -25,6 +16,7 @@ namespace Scrumapp.WebMvcUI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
@@ -135,7 +127,7 @@ namespace Scrumapp.WebMvcUI.Controllers
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)

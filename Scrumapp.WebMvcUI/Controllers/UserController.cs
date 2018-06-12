@@ -11,6 +11,7 @@ using Scrumapp.Data.Models;
 using Scrumapp.WebMvcUI.Models.AccountViewModels;
 using Scrumapp.WebMvcUI.Models.ManageViewModels;
 using Scrumapp.WebMvcUI.Models.UserViewModels;
+using Scrumapp.WebMvcUI.Utilities;
 
 namespace Scrumapp.WebMvcUI.Controllers
 {
@@ -19,11 +20,13 @@ namespace Scrumapp.WebMvcUI.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IFileService _fileService;
 
-        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IFileService fileService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _fileService = fileService;
         }
 
         [TempData]
@@ -39,7 +42,8 @@ namespace Scrumapp.WebMvcUI.Controllers
                 LastName = user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                ImageUrl = user.ImageUrl
             });
 
             var model = new UserIndexViewModel
@@ -69,9 +73,7 @@ namespace Scrumapp.WebMvcUI.Controllers
                     UserName = model.Email,
                     Email = model.Email
                 };
-
-                //_applicationUserService.Add(user);
-
+                
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded)
                 {
@@ -87,6 +89,9 @@ namespace Scrumapp.WebMvcUI.Controllers
                         AddErrors(newRoleResult);
                     }
                 }
+                
+                user.ImageUrl = await _fileService.Save(model.Image, "images/users");
+                await _userManager.UpdateAsync(user);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -114,6 +119,7 @@ namespace Scrumapp.WebMvcUI.Controllers
                 LastName = user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
+                ImageUrl = user.ImageUrl,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
@@ -189,8 +195,16 @@ namespace Scrumapp.WebMvcUI.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
+
+            if (model.ChangeImage)
+            {
+                _fileService.Delete(user.ImageUrl);
+                user.ImageUrl = await _fileService.Save(model.Image, "images/users");
+                await _userManager.UpdateAsync(user);
+            }
             
             StatusMessage = "Your profile has been updated";
+
             return RedirectToAction(nameof(Index));
         }
 

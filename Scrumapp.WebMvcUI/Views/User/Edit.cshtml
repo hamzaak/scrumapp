@@ -1,22 +1,20 @@
 ﻿@using Scrumapp.WebMvcUI.Models.ManageViewModels
 @using Scrumapp.WebMvcUI.Views.Manage
 @model Scrumapp.WebMvcUI.Models.UserViewModels.UserEditViewModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
 <div class="container">
     <h4>@ViewData["Title"]</h4>
     @Html.Partial("_StatusMessage", Model.StatusMessage)
-    <div class="row">
-        <div class="col-md-6">
-            <form method="post">
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <input asp-for="Id" type="hidden" />
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="IsAdmin">
-                            <input asp-for="IsAdmin" />
-                            @Html.DisplayNameFor(m => m.IsAdmin)
-                        </label>
-                    </div>
-                </div>
+               
                 <div class="form-group">
                     <label asp-for="FirstName"></label>
                     <input asp-for="FirstName" class="form-control" />
@@ -41,11 +39,43 @@
                     <input asp-for="PhoneNumber" class="form-control" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="IsAdmin">
+                            <input asp-for="IsAdmin" />
+                            @Html.DisplayNameFor(m => m.IsAdmin)
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-default">Update</button>
-            </form>
+            </div>
+            <div class="col-md-3">
+                <div class="card" >
+                    
+                    <div class="card-body">
+                        <p class="text-center">
+                            <img class="card-img-top" src="@Model.ImageUrl" alt="User Image" style="width: 100px;">
+                        </p>
+                        <p class="card-text">
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input asp-for="ChangeImage" class="custom-control-input" type="checkbox" />
+                                    <label asp-for="ChangeImage" class="custom-control-label"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Image"></label>
+                                <input asp-for="Image" type="file" class="form-control-file" />
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
+
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
