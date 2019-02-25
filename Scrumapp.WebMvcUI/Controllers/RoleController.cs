@@ -13,13 +13,15 @@ using Scrumapp.WebMvcUI.Models.RoleViewModels;
 namespace Scrumapp.WebMvcUI.Controllers
 {
     [Authorize]
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
-
-        public RoleController(RoleManager<ApplicationRole> roleManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        
+        public RoleController(RoleManager<ApplicationRole> roleManager, UserManager<ApplicationUser> userManager):base(userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         [TempData]

@@ -14,13 +14,13 @@ using Scrumapp.WebMvcUI.Models.UserViewModels;
 
 namespace Scrumapp.WebMvcUI.Controllers
 {
-    public class ScrumController : Controller
+    public class ScrumController : BaseController
     {
         private readonly IProjectService _projectService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public ScrumController(IProjectService projectService, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public ScrumController(IProjectService projectService, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager):base(userManager)
         {
             _projectService = projectService;
             _userManager = userManager;

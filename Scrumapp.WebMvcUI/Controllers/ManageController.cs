@@ -11,16 +11,15 @@ namespace Scrumapp.WebMvcUI.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         
-
         public ManageController(
           UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
+          SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager):base(userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

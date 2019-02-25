@@ -10,7 +10,7 @@
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="navbar-nav navbar-right">
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName!</a>
+                <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result??.FirstName!</a>
             </li>
             <li class="nav-item">
                 <button type="submit" class="btn btn-link navbar-btn nav-link">Log out</button>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -18,13 +19,15 @@ namespace Scrumapp.WebMvcUI.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
         private readonly IApplicationUserService _applicationUserService;
 
         
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IApplicationUserService applicationUserService)
+        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager, IApplicationUserService applicationUserService)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _applicationUserService = applicationUserService;
         }
@@ -119,6 +122,19 @@ namespace Scrumapp.WebMvcUI.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     //_logger.LogInformation("User created a new account with password.");
+
+
+                    if (!_roleManager.Roles.Any())
+                    {
+                        var createResult = await _roleManager.CreateAsync(new ApplicationRole
+                        {
+                            Name = "Admin",
+                            Description = "Auto-Created role",
+                            Status = true
+                        });
+                    }
+
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

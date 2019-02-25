@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,12 +34,22 @@ namespace Scrumapp.WebMvcUI
 
             services.AddScoped<IFileService, FileManager>();
 
-            services.AddDbContext<ScrumappDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ScrumappDbConnection")));
-
+            var useInMemoryDatabase = Configuration.GetValue<bool>("UseInMemoryDatabase");
+            if(useInMemoryDatabase)
+            {
+                services.AddDbContext<ScrumappDbContext>(options => options.UseInMemoryDatabase());
+            }
+            else
+            {
+                services.AddDbContext<ScrumappDbContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("ScrumappDbConnection")));
+            }
+            
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ScrumappDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/Login");
 
         }
 
@@ -54,7 +65,7 @@ namespace Scrumapp.WebMvcUI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            
             app.UseStaticFiles();
 
             app.UseAuthentication();

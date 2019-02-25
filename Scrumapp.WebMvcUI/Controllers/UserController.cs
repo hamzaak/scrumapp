@@ -16,13 +16,13 @@ using Scrumapp.WebMvcUI.Utilities;
 namespace Scrumapp.WebMvcUI.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IFileService _fileService;
 
-        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IFileService fileService)
+        public UserController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, IFileService fileService) : base(userManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -73,12 +73,12 @@ namespace Scrumapp.WebMvcUI.Controllers
                     UserName = model.Email,
                     Email = model.Email
                 };
-                
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded)
                 {
                     AddErrors(result);
-                    
+
                 }
 
                 if (model.IsAdmin)
@@ -89,7 +89,7 @@ namespace Scrumapp.WebMvcUI.Controllers
                         AddErrors(newRoleResult);
                     }
                 }
-                
+
                 user.ImageUrl = await _fileService.Save(model.Image, "images/users");
                 await _userManager.UpdateAsync(user);
 
@@ -103,7 +103,7 @@ namespace Scrumapp.WebMvcUI.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(x=>x.Id == id);
+            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user.");
@@ -113,7 +113,7 @@ namespace Scrumapp.WebMvcUI.Controllers
 
             var model = new UserEditViewModel
             {
-                Id=user.Id,
+                Id = user.Id,
                 IsAdmin = isAdminExists,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -202,7 +202,7 @@ namespace Scrumapp.WebMvcUI.Controllers
                 user.ImageUrl = await _fileService.Save(model.Image, "images/users");
                 await _userManager.UpdateAsync(user);
             }
-            
+
             StatusMessage = "Your profile has been updated";
 
             return RedirectToAction(nameof(Index));
@@ -217,7 +217,7 @@ namespace Scrumapp.WebMvcUI.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-        
+
         #endregion
     }
 }

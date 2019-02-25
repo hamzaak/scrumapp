@@ -5,7 +5,8 @@ A project management application that uses Agile Scrum methodology and exemplify
 ## Requirements
 
 * Visual Studio 2017 (Downlaod [here](https://www.visualstudio.com/))
-* MSSQLLocalDB
+* You can set UseInMemoryDatabase=true in appsettings.json file to not need any database instance.
+* Or you can set UseInMemoryDatabase=false in appsettings.json file in order to use MSSQL instance.
 
 ## Getting Started
 
