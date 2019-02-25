@@ -120,10 +120,7 @@ namespace Scrumapp.WebMvcUI.Controllers
                     //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //_logger.LogInformation("User created a new account with password.");
-
-
+                    //First user definition
                     if (!_roleManager.Roles.Any())
                     {
                         var createResult = await _roleManager.CreateAsync(new ApplicationRole
@@ -132,7 +129,16 @@ namespace Scrumapp.WebMvcUI.Controllers
                             Description = "Auto-Created role",
                             Status = true
                         });
+                        var newRoleResult = await _userManager.AddToRoleAsync(user, "Admin");
+                        if (!newRoleResult.Succeeded)
+                        {
+                            throw new ApplicationException($"Unable to add new user role.");
+                        }
                     }
+                    
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //_logger.LogInformation("User created a new account with password.");
+
 
 
                     return RedirectToLocal(returnUrl);
