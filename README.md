@@ -24,8 +24,8 @@ After open the solution ensure that you run below instructions to have an existi
 
 ### Project Profile
 
-![Project Profile](https://github.com/hamzaak/files/blob/master/Scrumapp/project-profile.png)
+![Project Profile](https://github.com/hamzaak/drive/blob/master/github-projects/scrumapp/files/project-profile.png)
 
 ### Scrumboard
 
-![Scrumboard](https://github.com/hamzaak/files/blob/master/Scrumapp/scrumboard.png)
+![Scrumboard](https://github.com/hamzaak/drive/blob/master/github-projects/scrumapp/files/scrumboard.png)
