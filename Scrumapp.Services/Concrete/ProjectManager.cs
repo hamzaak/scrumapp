@@ -167,5 +167,10 @@ namespace Scrumapp.Services.Concrete
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task AddTaskStatus(ProjectTaskStatus status)
+        {
+            await _context.ProjectTaskStatuses.AddAsync(status);
+        }
     }
 }

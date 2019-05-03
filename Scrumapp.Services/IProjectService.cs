@@ -29,5 +29,7 @@ namespace Scrumapp.Services
         Task StartTask(ProjectTask projectTask);
         Task VerifyTask(ProjectTask projectTask);
         Task CompleteTask(ProjectTask projectTask);
+
+        Task AddTaskStatus(ProjectTaskStatus status);
     }
 }

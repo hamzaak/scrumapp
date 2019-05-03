@@ -20,15 +20,20 @@ namespace Scrumapp.WebMvcUI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly IProjectService _projectService;
 
         private readonly IApplicationUserService _applicationUserService;
 
         
-        public AccountController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager, IApplicationUserService applicationUserService)
+        public AccountController(UserManager<ApplicationUser> userManager, 
+            RoleManager<ApplicationRole> roleManager, SignInManager<ApplicationUser> signInManager, 
+            IProjectService projectService,
+            IApplicationUserService applicationUserService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _projectService = projectService;
             _applicationUserService = applicationUserService;
         }
 
@@ -129,6 +134,12 @@ namespace Scrumapp.WebMvcUI.Controllers
                             Description = "Auto-Created role",
                             Status = true
                         });
+                        //init project task statuses
+                        await _projectService.AddTaskStatus(new ProjectTaskStatus { Id = "1", Name = "Backlog" });
+                        await _projectService.AddTaskStatus(new ProjectTaskStatus { Id = "2", Name = "In Progress" });
+                        await _projectService.AddTaskStatus(new ProjectTaskStatus { Id = "3", Name = "Test" });
+                        await _projectService.AddTaskStatus(new ProjectTaskStatus { Id = "4", Name = "Done" });
+
                         var newRoleResult = await _userManager.AddToRoleAsync(user, "Admin");
                         if (!newRoleResult.Succeeded)
                         {

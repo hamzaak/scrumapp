@@ -112,12 +112,14 @@ namespace Scrumapp.WebMvcUI.Controllers
             var project = await _projectService.GetByIdAsync(model.ProjectId);
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == model.UserId);
 
+            var projectTaskStatus = _projectService.GetProjectTaskStatuses().Where(x => x.Id == "1").ToList()[0];
             var projectTask = new ProjectTask
             {
                 Project = project,
                 User = user,
                 Content = model.Content,
-                Duration = new TimeSpan(0,model.Hour,model.Minute,0)
+                Duration = new TimeSpan(0,model.Hour,model.Minute,0),
+                Status = projectTaskStatus
             };
 
             await _projectService.AddTask(projectTask);

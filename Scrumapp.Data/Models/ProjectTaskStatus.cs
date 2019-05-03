@@ -9,7 +9,6 @@ namespace Scrumapp.Data.Models
     public class ProjectTaskStatus
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
 
         [Required]
